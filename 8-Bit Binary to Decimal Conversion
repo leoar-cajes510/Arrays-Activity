@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int binary[8];
+    int decimal = 0;
+
+    // Read exactly 8 binary digits
+    for (int i = 0; i < 8; i++) {
+        if (!(cin >> binary[i])) {
+            cout << "Invalid";
+            return 0;
+        }
+
+        // Check if input is only 0 or 1
+        if (binary[i] != 0 && binary[i] != 1) {
+            cout << "Invalid";
+            return 0;
+        }
+    }
+
+    // Check if there are extra inputs (more than 8)
+    int extra;
+    if (cin >> extra) {
+        cout << "Invalid";
+        return 0;
+    }
+
+    // Power of 2 method
+    // Leftmost bit = 2^7
+    for (int i = 0; i < 8; i++) {
+        int power = 1;
+
+        // Compute 2^(7 - i)
+        for (int j = 0; j < 7 - i; j++) {
+            power *= 2;
+        }
+
+        decimal += binary[i] * power;
+    }
+
+    cout << decimal;
+
+    return 0;
+}
